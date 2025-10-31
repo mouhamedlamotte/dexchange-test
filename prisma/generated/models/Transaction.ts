@@ -27,16 +27,20 @@ export type AggregateTransaction = {
 
 export type TransactionAvgAggregateOutputType = {
   amount: number | null
+  fees: number | null
 }
 
 export type TransactionSumAggregateOutputType = {
   amount: number | null
+  fees: number | null
 }
 
 export type TransactionMinAggregateOutputType = {
   id: string | null
   amount: number | null
   currency: $Enums.Currency | null
+  fees: number | null
+  reference: string | null
   channelId: string | null
   payeePhone: string | null
   payeeName: string | null
@@ -50,6 +54,8 @@ export type TransactionMaxAggregateOutputType = {
   id: string | null
   amount: number | null
   currency: $Enums.Currency | null
+  fees: number | null
+  reference: string | null
   channelId: string | null
   payeePhone: string | null
   payeeName: string | null
@@ -63,6 +69,8 @@ export type TransactionCountAggregateOutputType = {
   id: number
   amount: number
   currency: number
+  fees: number
+  reference: number
   channelId: number
   payeePhone: number
   payeeName: number
@@ -76,16 +84,20 @@ export type TransactionCountAggregateOutputType = {
 
 export type TransactionAvgAggregateInputType = {
   amount?: true
+  fees?: true
 }
 
 export type TransactionSumAggregateInputType = {
   amount?: true
+  fees?: true
 }
 
 export type TransactionMinAggregateInputType = {
   id?: true
   amount?: true
   currency?: true
+  fees?: true
+  reference?: true
   channelId?: true
   payeePhone?: true
   payeeName?: true
@@ -99,6 +111,8 @@ export type TransactionMaxAggregateInputType = {
   id?: true
   amount?: true
   currency?: true
+  fees?: true
+  reference?: true
   channelId?: true
   payeePhone?: true
   payeeName?: true
@@ -112,6 +126,8 @@ export type TransactionCountAggregateInputType = {
   id?: true
   amount?: true
   currency?: true
+  fees?: true
+  reference?: true
   channelId?: true
   payeePhone?: true
   payeeName?: true
@@ -212,6 +228,8 @@ export type TransactionGroupByOutputType = {
   id: string
   amount: number
   currency: $Enums.Currency
+  fees: number
+  reference: string
   channelId: string
   payeePhone: string
   payeeName: string
@@ -248,6 +266,8 @@ export type TransactionWhereInput = {
   id?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.FloatFilter<"Transaction"> | number
   currency?: Prisma.EnumCurrencyFilter<"Transaction"> | $Enums.Currency
+  fees?: Prisma.FloatFilter<"Transaction"> | number
+  reference?: Prisma.StringFilter<"Transaction"> | string
   channelId?: Prisma.StringFilter<"Transaction"> | string
   payeePhone?: Prisma.StringFilter<"Transaction"> | string
   payeeName?: Prisma.StringFilter<"Transaction"> | string
@@ -256,13 +276,15 @@ export type TransactionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   channel?: Prisma.XOR<Prisma.ChannelScalarRelationFilter, Prisma.ChannelWhereInput>
-  Action?: Prisma.ActionListRelationFilter
+  actions?: Prisma.ActionListRelationFilter
 }
 
 export type TransactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
   payeePhone?: Prisma.SortOrder
   payeeName?: Prisma.SortOrder
@@ -271,16 +293,18 @@ export type TransactionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   channel?: Prisma.ChannelOrderByWithRelationInput
-  Action?: Prisma.ActionOrderByRelationAggregateInput
+  actions?: Prisma.ActionOrderByRelationAggregateInput
 }
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  reference?: string
   AND?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   amount?: Prisma.FloatFilter<"Transaction"> | number
   currency?: Prisma.EnumCurrencyFilter<"Transaction"> | $Enums.Currency
+  fees?: Prisma.FloatFilter<"Transaction"> | number
   channelId?: Prisma.StringFilter<"Transaction"> | string
   payeePhone?: Prisma.StringFilter<"Transaction"> | string
   payeeName?: Prisma.StringFilter<"Transaction"> | string
@@ -289,13 +313,15 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   channel?: Prisma.XOR<Prisma.ChannelScalarRelationFilter, Prisma.ChannelWhereInput>
-  Action?: Prisma.ActionListRelationFilter
-}, "id">
+  actions?: Prisma.ActionListRelationFilter
+}, "id" | "reference">
 
 export type TransactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
   payeePhone?: Prisma.SortOrder
   payeeName?: Prisma.SortOrder
@@ -317,6 +343,8 @@ export type TransactionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   amount?: Prisma.FloatWithAggregatesFilter<"Transaction"> | number
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Transaction"> | $Enums.Currency
+  fees?: Prisma.FloatWithAggregatesFilter<"Transaction"> | number
+  reference?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   channelId?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   payeePhone?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   payeeName?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
@@ -330,6 +358,8 @@ export type TransactionCreateInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   payeePhone: string
   payeeName: string
   status?: $Enums.Status
@@ -337,13 +367,15 @@ export type TransactionCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   channel: Prisma.ChannelCreateNestedOneWithoutTransactionsInput
-  Action?: Prisma.ActionCreateNestedManyWithoutTransferInput
+  actions?: Prisma.ActionCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   channelId: string
   payeePhone: string
   payeeName: string
@@ -351,13 +383,15 @@ export type TransactionUncheckedCreateInput = {
   metadata?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  Action?: Prisma.ActionUncheckedCreateNestedManyWithoutTransferInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -365,13 +399,15 @@ export type TransactionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   channel?: Prisma.ChannelUpdateOneRequiredWithoutTransactionsNestedInput
-  Action?: Prisma.ActionUpdateManyWithoutTransferNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -379,13 +415,15 @@ export type TransactionUncheckedUpdateInput = {
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Action?: Prisma.ActionUncheckedUpdateManyWithoutTransferNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionCreateManyInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   channelId: string
   payeePhone: string
   payeeName: string
@@ -399,6 +437,8 @@ export type TransactionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -411,6 +451,8 @@ export type TransactionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -439,6 +481,8 @@ export type TransactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
   payeePhone?: Prisma.SortOrder
   payeeName?: Prisma.SortOrder
@@ -450,12 +494,15 @@ export type TransactionCountOrderByAggregateInput = {
 
 export type TransactionAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
 }
 
 export type TransactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
   payeePhone?: Prisma.SortOrder
   payeeName?: Prisma.SortOrder
@@ -469,6 +516,8 @@ export type TransactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
   payeePhone?: Prisma.SortOrder
   payeeName?: Prisma.SortOrder
@@ -480,20 +529,21 @@ export type TransactionMinOrderByAggregateInput = {
 
 export type TransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  fees?: Prisma.SortOrder
 }
 
-export type TransactionCreateNestedOneWithoutActionInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutActionInput, Prisma.TransactionUncheckedCreateWithoutActionInput>
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutActionInput
+export type TransactionCreateNestedOneWithoutActionsInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutActionsInput, Prisma.TransactionUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutActionsInput
   connect?: Prisma.TransactionWhereUniqueInput
 }
 
-export type TransactionUpdateOneRequiredWithoutActionNestedInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutActionInput, Prisma.TransactionUncheckedCreateWithoutActionInput>
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutActionInput
-  upsert?: Prisma.TransactionUpsertWithoutActionInput
+export type TransactionUpdateOneRequiredWithoutActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutActionsInput, Prisma.TransactionUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutActionsInput
+  upsert?: Prisma.TransactionUpsertWithoutActionsInput
   connect?: Prisma.TransactionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutActionInput, Prisma.TransactionUpdateWithoutActionInput>, Prisma.TransactionUncheckedUpdateWithoutActionInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutActionsInput, Prisma.TransactionUpdateWithoutActionsInput>, Prisma.TransactionUncheckedUpdateWithoutActionsInput>
 }
 
 export type TransactionCreateNestedManyWithoutChannelInput = {
@@ -554,10 +604,12 @@ export type EnumStatusFieldUpdateOperationsInput = {
   set?: $Enums.Status
 }
 
-export type TransactionCreateWithoutActionInput = {
+export type TransactionCreateWithoutActionsInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   payeePhone: string
   payeeName: string
   status?: $Enums.Status
@@ -567,10 +619,12 @@ export type TransactionCreateWithoutActionInput = {
   channel: Prisma.ChannelCreateNestedOneWithoutTransactionsInput
 }
 
-export type TransactionUncheckedCreateWithoutActionInput = {
+export type TransactionUncheckedCreateWithoutActionsInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   channelId: string
   payeePhone: string
   payeeName: string
@@ -580,26 +634,28 @@ export type TransactionUncheckedCreateWithoutActionInput = {
   updatedAt?: Date | string
 }
 
-export type TransactionCreateOrConnectWithoutActionInput = {
+export type TransactionCreateOrConnectWithoutActionsInput = {
   where: Prisma.TransactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutActionInput, Prisma.TransactionUncheckedCreateWithoutActionInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutActionsInput, Prisma.TransactionUncheckedCreateWithoutActionsInput>
 }
 
-export type TransactionUpsertWithoutActionInput = {
-  update: Prisma.XOR<Prisma.TransactionUpdateWithoutActionInput, Prisma.TransactionUncheckedUpdateWithoutActionInput>
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutActionInput, Prisma.TransactionUncheckedCreateWithoutActionInput>
+export type TransactionUpsertWithoutActionsInput = {
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutActionsInput, Prisma.TransactionUncheckedUpdateWithoutActionsInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutActionsInput, Prisma.TransactionUncheckedCreateWithoutActionsInput>
   where?: Prisma.TransactionWhereInput
 }
 
-export type TransactionUpdateToOneWithWhereWithoutActionInput = {
+export type TransactionUpdateToOneWithWhereWithoutActionsInput = {
   where?: Prisma.TransactionWhereInput
-  data: Prisma.XOR<Prisma.TransactionUpdateWithoutActionInput, Prisma.TransactionUncheckedUpdateWithoutActionInput>
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutActionsInput, Prisma.TransactionUncheckedUpdateWithoutActionsInput>
 }
 
-export type TransactionUpdateWithoutActionInput = {
+export type TransactionUpdateWithoutActionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -609,10 +665,12 @@ export type TransactionUpdateWithoutActionInput = {
   channel?: Prisma.ChannelUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
-export type TransactionUncheckedUpdateWithoutActionInput = {
+export type TransactionUncheckedUpdateWithoutActionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -626,26 +684,30 @@ export type TransactionCreateWithoutChannelInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   payeePhone: string
   payeeName: string
   status?: $Enums.Status
   metadata?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  Action?: Prisma.ActionCreateNestedManyWithoutTransferInput
+  actions?: Prisma.ActionCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutChannelInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   payeePhone: string
   payeeName: string
   status?: $Enums.Status
   metadata?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  Action?: Prisma.ActionUncheckedCreateNestedManyWithoutTransferInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutChannelInput = {
@@ -681,6 +743,8 @@ export type TransactionScalarWhereInput = {
   id?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.FloatFilter<"Transaction"> | number
   currency?: Prisma.EnumCurrencyFilter<"Transaction"> | $Enums.Currency
+  fees?: Prisma.FloatFilter<"Transaction"> | number
+  reference?: Prisma.StringFilter<"Transaction"> | string
   channelId?: Prisma.StringFilter<"Transaction"> | string
   payeePhone?: Prisma.StringFilter<"Transaction"> | string
   payeeName?: Prisma.StringFilter<"Transaction"> | string
@@ -694,6 +758,8 @@ export type TransactionCreateManyChannelInput = {
   id?: string
   amount: number
   currency?: $Enums.Currency
+  fees: number
+  reference: string
   payeePhone: string
   payeeName: string
   status?: $Enums.Status
@@ -706,32 +772,38 @@ export type TransactionUpdateWithoutChannelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Action?: Prisma.ActionUpdateManyWithoutTransferNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutChannelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Action?: Prisma.ActionUncheckedUpdateManyWithoutTransferNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutChannelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  fees?: Prisma.FloatFieldUpdateOperationsInput | number
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
   payeePhone?: Prisma.StringFieldUpdateOperationsInput | string
   payeeName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -746,11 +818,11 @@ export type TransactionUncheckedUpdateManyWithoutChannelInput = {
  */
 
 export type TransactionCountOutputType = {
-  Action: number
+  actions: number
 }
 
 export type TransactionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Action?: boolean | TransactionCountOutputTypeCountActionArgs
+  actions?: boolean | TransactionCountOutputTypeCountActionsArgs
 }
 
 /**
@@ -766,7 +838,7 @@ export type TransactionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
 /**
  * TransactionCountOutputType without action
  */
-export type TransactionCountOutputTypeCountActionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TransactionCountOutputTypeCountActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ActionWhereInput
 }
 
@@ -775,6 +847,8 @@ export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   amount?: boolean
   currency?: boolean
+  fees?: boolean
+  reference?: boolean
   channelId?: boolean
   payeePhone?: boolean
   payeeName?: boolean
@@ -783,7 +857,7 @@ export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   channel?: boolean | Prisma.ChannelDefaultArgs<ExtArgs>
-  Action?: boolean | Prisma.Transaction$ActionArgs<ExtArgs>
+  actions?: boolean | Prisma.Transaction$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
@@ -791,6 +865,8 @@ export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   amount?: boolean
   currency?: boolean
+  fees?: boolean
+  reference?: boolean
   channelId?: boolean
   payeePhone?: boolean
   payeeName?: boolean
@@ -805,6 +881,8 @@ export type TransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   amount?: boolean
   currency?: boolean
+  fees?: boolean
+  reference?: boolean
   channelId?: boolean
   payeePhone?: boolean
   payeeName?: boolean
@@ -819,6 +897,8 @@ export type TransactionSelectScalar = {
   id?: boolean
   amount?: boolean
   currency?: boolean
+  fees?: boolean
+  reference?: boolean
   channelId?: boolean
   payeePhone?: boolean
   payeeName?: boolean
@@ -828,10 +908,10 @@ export type TransactionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "currency" | "channelId" | "payeePhone" | "payeeName" | "status" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
+export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "currency" | "fees" | "reference" | "channelId" | "payeePhone" | "payeeName" | "status" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   channel?: boolean | Prisma.ChannelDefaultArgs<ExtArgs>
-  Action?: boolean | Prisma.Transaction$ActionArgs<ExtArgs>
+  actions?: boolean | Prisma.Transaction$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -845,12 +925,14 @@ export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Transaction"
   objects: {
     channel: Prisma.$ChannelPayload<ExtArgs>
-    Action: Prisma.$ActionPayload<ExtArgs>[]
+    actions: Prisma.$ActionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     amount: number
     currency: $Enums.Currency
+    fees: number
+    reference: string
     channelId: string
     payeePhone: string
     payeeName: string
@@ -1253,7 +1335,7 @@ readonly fields: TransactionFieldRefs;
 export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   channel<T extends Prisma.ChannelDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChannelDefaultArgs<ExtArgs>>): Prisma.Prisma__ChannelClient<runtime.Types.Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Action<T extends Prisma.Transaction$ActionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$ActionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  actions<T extends Prisma.Transaction$actionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1286,6 +1368,8 @@ export interface TransactionFieldRefs {
   readonly id: Prisma.FieldRef<"Transaction", 'String'>
   readonly amount: Prisma.FieldRef<"Transaction", 'Float'>
   readonly currency: Prisma.FieldRef<"Transaction", 'Currency'>
+  readonly fees: Prisma.FieldRef<"Transaction", 'Float'>
+  readonly reference: Prisma.FieldRef<"Transaction", 'String'>
   readonly channelId: Prisma.FieldRef<"Transaction", 'String'>
   readonly payeePhone: Prisma.FieldRef<"Transaction", 'String'>
   readonly payeeName: Prisma.FieldRef<"Transaction", 'String'>
@@ -1689,9 +1773,9 @@ export type TransactionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Transaction.Action
+ * Transaction.actions
  */
-export type Transaction$ActionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Transaction$actionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Action
    */

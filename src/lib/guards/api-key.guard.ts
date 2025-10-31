@@ -3,6 +3,7 @@ import {
   CanActivate,
   ExecutionContext,
   UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common';
 
 @Injectable()
@@ -16,7 +17,7 @@ export class ApiKeyGuard implements CanActivate {
     }
 
     if (apiKey !== process.env.X_API_KEY) {
-      throw new UnauthorizedException('Invalid API key');
+      throw new ForbiddenException('Invalid API key');
     }
 
     return true;

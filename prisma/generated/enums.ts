@@ -29,6 +29,7 @@ export type Currency = (typeof Currency)[keyof typeof Currency]
 export const Status = {
   PENDING: 'PENDING',
   SUCCESS: 'SUCCESS',
+  PROCESSING: 'PROCESSING',
   FAILED: 'FAILED',
   CANCELED: 'CANCELED'
 } as const

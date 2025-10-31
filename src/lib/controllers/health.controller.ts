@@ -1,5 +1,10 @@
 import { Controller, Get, HttpCode } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+  ApiTags,
+} from '@nestjs/swagger';
 
 const reponse = {
   status: 'OK',
@@ -8,6 +13,8 @@ const reponse = {
 };
 
 @Controller('health')
+@ApiTags('Health')
+@ApiSecurity('x-api-key')
 export class HealthController {
   @ApiOperation({ summary: 'Health Check Endpoint' })
   @ApiResponse({

@@ -41,6 +41,9 @@ importers:
       install:
         specifier: ^0.13.0
         version: 0.13.0
+      libphonenumber-js:
+        specifier: ^1.12.25
+        version: 1.12.25
       npm:
         specifier: ^11.6.2
         version: 11.6.2

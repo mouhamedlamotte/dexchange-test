@@ -29,6 +29,8 @@ export type ChannelMinAggregateOutputType = {
   code: string | null
   logoUrl: string | null
   isActive: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ChannelMaxAggregateOutputType = {
@@ -37,6 +39,8 @@ export type ChannelMaxAggregateOutputType = {
   code: string | null
   logoUrl: string | null
   isActive: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ChannelCountAggregateOutputType = {
@@ -45,6 +49,8 @@ export type ChannelCountAggregateOutputType = {
   code: number
   logoUrl: number
   isActive: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -55,6 +61,8 @@ export type ChannelMinAggregateInputType = {
   code?: true
   logoUrl?: true
   isActive?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ChannelMaxAggregateInputType = {
@@ -63,6 +71,8 @@ export type ChannelMaxAggregateInputType = {
   code?: true
   logoUrl?: true
   isActive?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ChannelCountAggregateInputType = {
@@ -71,6 +81,8 @@ export type ChannelCountAggregateInputType = {
   code?: true
   logoUrl?: true
   isActive?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -152,6 +164,8 @@ export type ChannelGroupByOutputType = {
   code: string
   logoUrl: string | null
   isActive: boolean
+  createdAt: Date
+  updatedAt: Date
   _count: ChannelCountAggregateOutputType | null
   _min: ChannelMinAggregateOutputType | null
   _max: ChannelMaxAggregateOutputType | null
@@ -181,6 +195,8 @@ export type ChannelWhereInput = {
   code?: Prisma.StringFilter<"Channel"> | string
   logoUrl?: Prisma.StringNullableFilter<"Channel"> | string | null
   isActive?: Prisma.BoolFilter<"Channel"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Channel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Channel"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
 }
 
@@ -190,6 +206,8 @@ export type ChannelOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
@@ -202,6 +220,8 @@ export type ChannelWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Channel"> | string
   logoUrl?: Prisma.StringNullableFilter<"Channel"> | string | null
   isActive?: Prisma.BoolFilter<"Channel"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Channel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Channel"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
 }, "id" | "code">
 
@@ -211,6 +231,8 @@ export type ChannelOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ChannelCountOrderByAggregateInput
   _max?: Prisma.ChannelMaxOrderByAggregateInput
   _min?: Prisma.ChannelMinOrderByAggregateInput
@@ -225,6 +247,8 @@ export type ChannelScalarWhereWithAggregatesInput = {
   code?: Prisma.StringWithAggregatesFilter<"Channel"> | string
   logoUrl?: Prisma.StringNullableWithAggregatesFilter<"Channel"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Channel"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Channel"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Channel"> | Date | string
 }
 
 export type ChannelCreateInput = {
@@ -233,6 +257,8 @@ export type ChannelCreateInput = {
   code: string
   logoUrl?: string | null
   isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutChannelInput
 }
 
@@ -242,6 +268,8 @@ export type ChannelUncheckedCreateInput = {
   code: string
   logoUrl?: string | null
   isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutChannelInput
 }
 
@@ -251,6 +279,8 @@ export type ChannelUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutChannelNestedInput
 }
 
@@ -260,6 +290,8 @@ export type ChannelUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutChannelNestedInput
 }
 
@@ -269,6 +301,8 @@ export type ChannelCreateManyInput = {
   code: string
   logoUrl?: string | null
   isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ChannelUpdateManyMutationInput = {
@@ -277,6 +311,8 @@ export type ChannelUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChannelUncheckedUpdateManyInput = {
@@ -285,6 +321,8 @@ export type ChannelUncheckedUpdateManyInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChannelCountOrderByAggregateInput = {
@@ -293,6 +331,8 @@ export type ChannelCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ChannelMaxOrderByAggregateInput = {
@@ -301,6 +341,8 @@ export type ChannelMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ChannelMinOrderByAggregateInput = {
@@ -309,6 +351,8 @@ export type ChannelMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ChannelScalarRelationFilter = {
@@ -344,6 +388,8 @@ export type ChannelCreateWithoutTransactionsInput = {
   code: string
   logoUrl?: string | null
   isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ChannelUncheckedCreateWithoutTransactionsInput = {
@@ -352,6 +398,8 @@ export type ChannelUncheckedCreateWithoutTransactionsInput = {
   code: string
   logoUrl?: string | null
   isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ChannelCreateOrConnectWithoutTransactionsInput = {
@@ -376,6 +424,8 @@ export type ChannelUpdateWithoutTransactionsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChannelUncheckedUpdateWithoutTransactionsInput = {
@@ -384,6 +434,8 @@ export type ChannelUncheckedUpdateWithoutTransactionsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -423,6 +475,8 @@ export type ChannelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   code?: boolean
   logoUrl?: boolean
   isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   transactions?: boolean | Prisma.Channel$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.ChannelCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["channel"]>
@@ -433,6 +487,8 @@ export type ChannelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   code?: boolean
   logoUrl?: boolean
   isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["channel"]>
 
 export type ChannelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -441,6 +497,8 @@ export type ChannelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   code?: boolean
   logoUrl?: boolean
   isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["channel"]>
 
 export type ChannelSelectScalar = {
@@ -449,9 +507,11 @@ export type ChannelSelectScalar = {
   code?: boolean
   logoUrl?: boolean
   isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ChannelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "logoUrl" | "isActive", ExtArgs["result"]["channel"]>
+export type ChannelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "logoUrl" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["channel"]>
 export type ChannelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Channel$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.ChannelCountOutputTypeDefaultArgs<ExtArgs>
@@ -470,6 +530,8 @@ export type $ChannelPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     code: string
     logoUrl: string | null
     isActive: boolean
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["channel"]>
   composites: {}
 }
@@ -899,6 +961,8 @@ export interface ChannelFieldRefs {
   readonly code: Prisma.FieldRef<"Channel", 'String'>
   readonly logoUrl: Prisma.FieldRef<"Channel", 'String'>
   readonly isActive: Prisma.FieldRef<"Channel", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"Channel", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Channel", 'DateTime'>
 }
     
 

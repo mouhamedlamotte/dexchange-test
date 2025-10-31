@@ -26,25 +26,25 @@ export type AggregateAction = {
 export type ActionMinAggregateOutputType = {
   id: string | null
   type: $Enums.ActionType | null
+  transactionId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  transferId: string | null
 }
 
 export type ActionMaxAggregateOutputType = {
   id: string | null
   type: $Enums.ActionType | null
+  transactionId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  transferId: string | null
 }
 
 export type ActionCountAggregateOutputType = {
   id: number
   type: number
+  transactionId: number
   createdAt: number
   updatedAt: number
-  transferId: number
   _all: number
 }
 
@@ -52,25 +52,25 @@ export type ActionCountAggregateOutputType = {
 export type ActionMinAggregateInputType = {
   id?: true
   type?: true
+  transactionId?: true
   createdAt?: true
   updatedAt?: true
-  transferId?: true
 }
 
 export type ActionMaxAggregateInputType = {
   id?: true
   type?: true
+  transactionId?: true
   createdAt?: true
   updatedAt?: true
-  transferId?: true
 }
 
 export type ActionCountAggregateInputType = {
   id?: true
   type?: true
+  transactionId?: true
   createdAt?: true
   updatedAt?: true
-  transferId?: true
   _all?: true
 }
 
@@ -149,9 +149,9 @@ export type ActionGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type ActionGroupByOutputType = {
   id: string
   type: $Enums.ActionType
+  transactionId: string
   createdAt: Date
   updatedAt: Date
-  transferId: string
   _count: ActionCountAggregateOutputType | null
   _min: ActionMinAggregateOutputType | null
   _max: ActionMaxAggregateOutputType | null
@@ -178,19 +178,19 @@ export type ActionWhereInput = {
   NOT?: Prisma.ActionWhereInput | Prisma.ActionWhereInput[]
   id?: Prisma.StringFilter<"Action"> | string
   type?: Prisma.EnumActionTypeFilter<"Action"> | $Enums.ActionType
+  transactionId?: Prisma.StringFilter<"Action"> | string
   createdAt?: Prisma.DateTimeFilter<"Action"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Action"> | Date | string
-  transferId?: Prisma.StringFilter<"Action"> | string
-  transfer?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
+  transaction?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
 }
 
 export type ActionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  transactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  transferId?: Prisma.SortOrder
-  transfer?: Prisma.TransactionOrderByWithRelationInput
+  transaction?: Prisma.TransactionOrderByWithRelationInput
 }
 
 export type ActionWhereUniqueInput = Prisma.AtLeast<{
@@ -199,18 +199,18 @@ export type ActionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ActionWhereInput[]
   NOT?: Prisma.ActionWhereInput | Prisma.ActionWhereInput[]
   type?: Prisma.EnumActionTypeFilter<"Action"> | $Enums.ActionType
+  transactionId?: Prisma.StringFilter<"Action"> | string
   createdAt?: Prisma.DateTimeFilter<"Action"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Action"> | Date | string
-  transferId?: Prisma.StringFilter<"Action"> | string
-  transfer?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
+  transaction?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
 }, "id">
 
 export type ActionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  transactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  transferId?: Prisma.SortOrder
   _count?: Prisma.ActionCountOrderByAggregateInput
   _max?: Prisma.ActionMaxOrderByAggregateInput
   _min?: Prisma.ActionMinOrderByAggregateInput
@@ -222,9 +222,9 @@ export type ActionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ActionScalarWhereWithAggregatesInput | Prisma.ActionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Action"> | string
   type?: Prisma.EnumActionTypeWithAggregatesFilter<"Action"> | $Enums.ActionType
+  transactionId?: Prisma.StringWithAggregatesFilter<"Action"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Action"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Action"> | Date | string
-  transferId?: Prisma.StringWithAggregatesFilter<"Action"> | string
 }
 
 export type ActionCreateInput = {
@@ -232,15 +232,15 @@ export type ActionCreateInput = {
   type: $Enums.ActionType
   createdAt?: Date | string
   updatedAt?: Date | string
-  transfer: Prisma.TransactionCreateNestedOneWithoutActionInput
+  transaction: Prisma.TransactionCreateNestedOneWithoutActionsInput
 }
 
 export type ActionUncheckedCreateInput = {
   id?: string
   type: $Enums.ActionType
+  transactionId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  transferId: string
 }
 
 export type ActionUpdateInput = {
@@ -248,23 +248,23 @@ export type ActionUpdateInput = {
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transfer?: Prisma.TransactionUpdateOneRequiredWithoutActionNestedInput
+  transaction?: Prisma.TransactionUpdateOneRequiredWithoutActionsNestedInput
 }
 
 export type ActionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
+  transactionId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transferId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ActionCreateManyInput = {
   id?: string
   type: $Enums.ActionType
+  transactionId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  transferId: string
 }
 
 export type ActionUpdateManyMutationInput = {
@@ -277,33 +277,33 @@ export type ActionUpdateManyMutationInput = {
 export type ActionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
+  transactionId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transferId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ActionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  transactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  transferId?: Prisma.SortOrder
 }
 
 export type ActionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  transactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  transferId?: Prisma.SortOrder
 }
 
 export type ActionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  transactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  transferId?: Prisma.SortOrder
 }
 
 export type ActionListRelationFilter = {
@@ -328,86 +328,86 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type ActionCreateNestedManyWithoutTransferInput = {
-  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput> | Prisma.ActionCreateWithoutTransferInput[] | Prisma.ActionUncheckedCreateWithoutTransferInput[]
-  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransferInput | Prisma.ActionCreateOrConnectWithoutTransferInput[]
-  createMany?: Prisma.ActionCreateManyTransferInputEnvelope
+export type ActionCreateNestedManyWithoutTransactionInput = {
+  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput> | Prisma.ActionCreateWithoutTransactionInput[] | Prisma.ActionUncheckedCreateWithoutTransactionInput[]
+  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransactionInput | Prisma.ActionCreateOrConnectWithoutTransactionInput[]
+  createMany?: Prisma.ActionCreateManyTransactionInputEnvelope
   connect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
 }
 
-export type ActionUncheckedCreateNestedManyWithoutTransferInput = {
-  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput> | Prisma.ActionCreateWithoutTransferInput[] | Prisma.ActionUncheckedCreateWithoutTransferInput[]
-  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransferInput | Prisma.ActionCreateOrConnectWithoutTransferInput[]
-  createMany?: Prisma.ActionCreateManyTransferInputEnvelope
+export type ActionUncheckedCreateNestedManyWithoutTransactionInput = {
+  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput> | Prisma.ActionCreateWithoutTransactionInput[] | Prisma.ActionUncheckedCreateWithoutTransactionInput[]
+  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransactionInput | Prisma.ActionCreateOrConnectWithoutTransactionInput[]
+  createMany?: Prisma.ActionCreateManyTransactionInputEnvelope
   connect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
 }
 
-export type ActionUpdateManyWithoutTransferNestedInput = {
-  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput> | Prisma.ActionCreateWithoutTransferInput[] | Prisma.ActionUncheckedCreateWithoutTransferInput[]
-  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransferInput | Prisma.ActionCreateOrConnectWithoutTransferInput[]
-  upsert?: Prisma.ActionUpsertWithWhereUniqueWithoutTransferInput | Prisma.ActionUpsertWithWhereUniqueWithoutTransferInput[]
-  createMany?: Prisma.ActionCreateManyTransferInputEnvelope
+export type ActionUpdateManyWithoutTransactionNestedInput = {
+  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput> | Prisma.ActionCreateWithoutTransactionInput[] | Prisma.ActionUncheckedCreateWithoutTransactionInput[]
+  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransactionInput | Prisma.ActionCreateOrConnectWithoutTransactionInput[]
+  upsert?: Prisma.ActionUpsertWithWhereUniqueWithoutTransactionInput | Prisma.ActionUpsertWithWhereUniqueWithoutTransactionInput[]
+  createMany?: Prisma.ActionCreateManyTransactionInputEnvelope
   set?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   disconnect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   delete?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   connect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
-  update?: Prisma.ActionUpdateWithWhereUniqueWithoutTransferInput | Prisma.ActionUpdateWithWhereUniqueWithoutTransferInput[]
-  updateMany?: Prisma.ActionUpdateManyWithWhereWithoutTransferInput | Prisma.ActionUpdateManyWithWhereWithoutTransferInput[]
+  update?: Prisma.ActionUpdateWithWhereUniqueWithoutTransactionInput | Prisma.ActionUpdateWithWhereUniqueWithoutTransactionInput[]
+  updateMany?: Prisma.ActionUpdateManyWithWhereWithoutTransactionInput | Prisma.ActionUpdateManyWithWhereWithoutTransactionInput[]
   deleteMany?: Prisma.ActionScalarWhereInput | Prisma.ActionScalarWhereInput[]
 }
 
-export type ActionUncheckedUpdateManyWithoutTransferNestedInput = {
-  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput> | Prisma.ActionCreateWithoutTransferInput[] | Prisma.ActionUncheckedCreateWithoutTransferInput[]
-  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransferInput | Prisma.ActionCreateOrConnectWithoutTransferInput[]
-  upsert?: Prisma.ActionUpsertWithWhereUniqueWithoutTransferInput | Prisma.ActionUpsertWithWhereUniqueWithoutTransferInput[]
-  createMany?: Prisma.ActionCreateManyTransferInputEnvelope
+export type ActionUncheckedUpdateManyWithoutTransactionNestedInput = {
+  create?: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput> | Prisma.ActionCreateWithoutTransactionInput[] | Prisma.ActionUncheckedCreateWithoutTransactionInput[]
+  connectOrCreate?: Prisma.ActionCreateOrConnectWithoutTransactionInput | Prisma.ActionCreateOrConnectWithoutTransactionInput[]
+  upsert?: Prisma.ActionUpsertWithWhereUniqueWithoutTransactionInput | Prisma.ActionUpsertWithWhereUniqueWithoutTransactionInput[]
+  createMany?: Prisma.ActionCreateManyTransactionInputEnvelope
   set?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   disconnect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   delete?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
   connect?: Prisma.ActionWhereUniqueInput | Prisma.ActionWhereUniqueInput[]
-  update?: Prisma.ActionUpdateWithWhereUniqueWithoutTransferInput | Prisma.ActionUpdateWithWhereUniqueWithoutTransferInput[]
-  updateMany?: Prisma.ActionUpdateManyWithWhereWithoutTransferInput | Prisma.ActionUpdateManyWithWhereWithoutTransferInput[]
+  update?: Prisma.ActionUpdateWithWhereUniqueWithoutTransactionInput | Prisma.ActionUpdateWithWhereUniqueWithoutTransactionInput[]
+  updateMany?: Prisma.ActionUpdateManyWithWhereWithoutTransactionInput | Prisma.ActionUpdateManyWithWhereWithoutTransactionInput[]
   deleteMany?: Prisma.ActionScalarWhereInput | Prisma.ActionScalarWhereInput[]
 }
 
-export type ActionCreateWithoutTransferInput = {
+export type ActionCreateWithoutTransactionInput = {
   id?: string
   type: $Enums.ActionType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type ActionUncheckedCreateWithoutTransferInput = {
+export type ActionUncheckedCreateWithoutTransactionInput = {
   id?: string
   type: $Enums.ActionType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type ActionCreateOrConnectWithoutTransferInput = {
+export type ActionCreateOrConnectWithoutTransactionInput = {
   where: Prisma.ActionWhereUniqueInput
-  create: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput>
+  create: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput>
 }
 
-export type ActionCreateManyTransferInputEnvelope = {
-  data: Prisma.ActionCreateManyTransferInput | Prisma.ActionCreateManyTransferInput[]
+export type ActionCreateManyTransactionInputEnvelope = {
+  data: Prisma.ActionCreateManyTransactionInput | Prisma.ActionCreateManyTransactionInput[]
   skipDuplicates?: boolean
 }
 
-export type ActionUpsertWithWhereUniqueWithoutTransferInput = {
+export type ActionUpsertWithWhereUniqueWithoutTransactionInput = {
   where: Prisma.ActionWhereUniqueInput
-  update: Prisma.XOR<Prisma.ActionUpdateWithoutTransferInput, Prisma.ActionUncheckedUpdateWithoutTransferInput>
-  create: Prisma.XOR<Prisma.ActionCreateWithoutTransferInput, Prisma.ActionUncheckedCreateWithoutTransferInput>
+  update: Prisma.XOR<Prisma.ActionUpdateWithoutTransactionInput, Prisma.ActionUncheckedUpdateWithoutTransactionInput>
+  create: Prisma.XOR<Prisma.ActionCreateWithoutTransactionInput, Prisma.ActionUncheckedCreateWithoutTransactionInput>
 }
 
-export type ActionUpdateWithWhereUniqueWithoutTransferInput = {
+export type ActionUpdateWithWhereUniqueWithoutTransactionInput = {
   where: Prisma.ActionWhereUniqueInput
-  data: Prisma.XOR<Prisma.ActionUpdateWithoutTransferInput, Prisma.ActionUncheckedUpdateWithoutTransferInput>
+  data: Prisma.XOR<Prisma.ActionUpdateWithoutTransactionInput, Prisma.ActionUncheckedUpdateWithoutTransactionInput>
 }
 
-export type ActionUpdateManyWithWhereWithoutTransferInput = {
+export type ActionUpdateManyWithWhereWithoutTransactionInput = {
   where: Prisma.ActionScalarWhereInput
-  data: Prisma.XOR<Prisma.ActionUpdateManyMutationInput, Prisma.ActionUncheckedUpdateManyWithoutTransferInput>
+  data: Prisma.XOR<Prisma.ActionUpdateManyMutationInput, Prisma.ActionUncheckedUpdateManyWithoutTransactionInput>
 }
 
 export type ActionScalarWhereInput = {
@@ -416,33 +416,33 @@ export type ActionScalarWhereInput = {
   NOT?: Prisma.ActionScalarWhereInput | Prisma.ActionScalarWhereInput[]
   id?: Prisma.StringFilter<"Action"> | string
   type?: Prisma.EnumActionTypeFilter<"Action"> | $Enums.ActionType
+  transactionId?: Prisma.StringFilter<"Action"> | string
   createdAt?: Prisma.DateTimeFilter<"Action"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Action"> | Date | string
-  transferId?: Prisma.StringFilter<"Action"> | string
 }
 
-export type ActionCreateManyTransferInput = {
+export type ActionCreateManyTransactionInput = {
   id?: string
   type: $Enums.ActionType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type ActionUpdateWithoutTransferInput = {
+export type ActionUpdateWithoutTransactionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ActionUncheckedUpdateWithoutTransferInput = {
+export type ActionUncheckedUpdateWithoutTransactionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ActionUncheckedUpdateManyWithoutTransferInput = {
+export type ActionUncheckedUpdateManyWithoutTransactionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -454,60 +454,60 @@ export type ActionUncheckedUpdateManyWithoutTransferInput = {
 export type ActionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  transactionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  transferId?: boolean
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["action"]>
 
 export type ActionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  transactionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  transferId?: boolean
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["action"]>
 
 export type ActionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  transactionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  transferId?: boolean
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["action"]>
 
 export type ActionSelectScalar = {
   id?: boolean
   type?: boolean
+  transactionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  transferId?: boolean
 }
 
-export type ActionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "createdAt" | "updatedAt" | "transferId", ExtArgs["result"]["action"]>
+export type ActionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "transactionId" | "createdAt" | "updatedAt", ExtArgs["result"]["action"]>
 export type ActionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }
 export type ActionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }
 export type ActionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  transfer?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
+  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
 }
 
 export type $ActionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Action"
   objects: {
-    transfer: Prisma.$TransactionPayload<ExtArgs>
+    transaction: Prisma.$TransactionPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     type: $Enums.ActionType
+    transactionId: string
     createdAt: Date
     updatedAt: Date
-    transferId: string
   }, ExtArgs["result"]["action"]>
   composites: {}
 }
@@ -902,7 +902,7 @@ readonly fields: ActionFieldRefs;
  */
 export interface Prisma__ActionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  transfer<T extends Prisma.TransactionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TransactionDefaultArgs<ExtArgs>>): Prisma.Prisma__TransactionClient<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  transaction<T extends Prisma.TransactionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TransactionDefaultArgs<ExtArgs>>): Prisma.Prisma__TransactionClient<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -934,9 +934,9 @@ export interface Prisma__ActionClient<T, Null = never, ExtArgs extends runtime.T
 export interface ActionFieldRefs {
   readonly id: Prisma.FieldRef<"Action", 'String'>
   readonly type: Prisma.FieldRef<"Action", 'ActionType'>
+  readonly transactionId: Prisma.FieldRef<"Action", 'String'>
   readonly createdAt: Prisma.FieldRef<"Action", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Action", 'DateTime'>
-  readonly transferId: Prisma.FieldRef<"Action", 'String'>
 }
     
 

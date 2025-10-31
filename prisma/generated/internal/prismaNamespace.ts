@@ -675,9 +675,9 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const ActionScalarFieldEnum = {
   id: 'id',
   type: 'type',
+  transactionId: 'transactionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  transferId: 'transferId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ActionScalarFieldEnum = (typeof ActionScalarFieldEnum)[keyof typeof ActionScalarFieldEnum]
@@ -688,7 +688,9 @@ export const ChannelScalarFieldEnum = {
   name: 'name',
   code: 'code',
   logoUrl: 'logoUrl',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ChannelScalarFieldEnum = (typeof ChannelScalarFieldEnum)[keyof typeof ChannelScalarFieldEnum]
@@ -698,6 +700,8 @@ export const TransactionScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
   currency: 'currency',
+  fees: 'fees',
+  reference: 'reference',
   channelId: 'channelId',
   payeePhone: 'payeePhone',
   payeeName: 'payeeName',

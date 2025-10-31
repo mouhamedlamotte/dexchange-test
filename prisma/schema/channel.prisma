@@ -5,5 +5,8 @@ model Channel {
   logoUrl  String?
   isActive Boolean @default(true) @map("is_active")
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   transactions Transaction[]
 }

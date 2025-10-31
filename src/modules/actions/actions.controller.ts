@@ -1,0 +1,63 @@
+import { Controller, Get, Query, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ActionsService } from './actions.service';
+import { GetActionLogsDto } from './dto/get-action-logs.dto';
+import { BadrequestResponse, InternalServerErrorResponse } from 'src/lib/dto';
+
+@ApiTags('Actions')
+@Controller('actions')
+export class ActionsController {
+  constructor(private readonly service: ActionsService) {}
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Récupérer la liste des logs d’actions',
+    description:
+      'Retourne une liste paginée des actions effectuées (transactions, changements d’état, etc.). ' +
+      'Supporte la pagination, le tri, la recherche et les filtres.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Liste paginée des logs d’actions',
+    schema: {
+      example: {
+        data: [
+          {
+            type: 'TRANSACTION_CREATED',
+            transaction: {
+              reference: 'TXN_12345',
+              amount: 12500,
+              fees: 250,
+              payeeName: 'John Doe',
+              payeePhone: '+221770000000',
+              channel: {
+                code: 'wave',
+                name: 'Wave',
+              },
+            },
+          },
+        ],
+        meta: {
+          page: 1,
+          limit: 10,
+          total: 45,
+          totalPages: 5,
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    type: BadrequestResponse,
+    description: 'Paramètres de requête invalides',
+  })
+  @ApiResponse({
+    type: InternalServerErrorResponse,
+    status: 500,
+    description: 'Erreur interne du serveur',
+  })
+  async findAll(@Query() query: GetActionLogsDto) {
+    return this.service.findAll(query);
+  }
+}
