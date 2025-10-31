@@ -1,0 +1,30 @@
+enum Currency {
+  XOF
+}
+
+enum Status {
+  PENDING
+  SUCCESS
+  FAILED
+  CANCELED
+}
+
+model Transaction {
+  id       String   @id @default(cuid())
+  amount   Float
+  currency Currency @default(XOF)
+
+  channelId String
+  channel   Channel @relation(fields: [channelId], references: [id])
+
+  payeePhone String
+  payeeName  String
+
+  status Status @default(PENDING)
+
+  metadata String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Action    Action[]
+}

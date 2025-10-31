@@ -1,0 +1,9 @@
+model Channel {
+  id       String  @id @default(cuid())
+  name     String
+  code     String  @unique
+  logoUrl  String?
+  isActive Boolean @default(true) @map("is_active")
+
+  transactions Transaction[]
+}

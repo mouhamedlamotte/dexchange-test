@@ -1,0 +1,16 @@
+enum ActionType {
+  TRANSFER_CREATED
+  TRANSFER_PROCESSING
+  TRANSFER_SUCCESS
+  TRANSFER_FAILED
+  TRANSFER_CANCELED
+}
+
+model Action {
+  id         String      @id @default(cuid())
+  type       ActionType
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  transferId String
+  transfer   Transaction @relation(fields: [transferId], references: [id])
+}
