@@ -15,4 +15,4 @@ export class PrismaService
   }
 }
 
-export * from '@prisma/client';
+export * from 'prisma/generated/client';
