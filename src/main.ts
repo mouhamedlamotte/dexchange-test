@@ -8,7 +8,6 @@ import * as compression from 'compression';
 import { CustomExceptionFilter } from './lib/filters';
 import { ErrorInterceptor } from './lib/interceptors';
 import { AppModule } from './modules/app.module';
-import { ApiKeyGuard } from './lib/guards/api-key.guard';
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
 
@@ -73,21 +72,18 @@ async function bootstrap() {
 
     app.useGlobalFilters(new CustomExceptionFilter());
     app.useGlobalInterceptors(new ErrorInterceptor());
-    app.useGlobalGuards(new ApiKeyGuard());
 
     const config = new DocumentBuilder()
+      .addApiKey({
+        type: 'apiKey',
+        name: 'x-api-key',
+        in: 'header',
+        description: 'API Key For External calls',
+      })
       .setTitle(configService.get('app.name'))
       .setDescription(`${name} API Documentation`)
       .setVersion(configService.get('app.version'))
       .addServer(`http://localhost:${port}`, 'Local Serveur')
-      .addApiKey(
-        {
-          type: 'apiKey',
-          name: 'x-api-Key',
-          in: 'header',
-        },
-        'x-api-Key',
-      )
       .build();
 
     const document = SwaggerModule.createDocument(app, config);

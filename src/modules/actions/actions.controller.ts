@@ -1,10 +1,25 @@
-import { Controller, Get, Query, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Query,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { ActionsService } from './actions.service';
 import { GetActionLogsDto } from './dto/get-action-logs.dto';
 import { BadrequestResponse, InternalServerErrorResponse } from 'src/lib/dto';
+import { ApiKeyGuard } from 'src/lib/guards/api-key.guard';
 
 @ApiTags('Actions')
+@UseGuards(ApiKeyGuard)
+@ApiSecurity('api_key', ['x-api-key'])
 @Controller('actions')
 export class ActionsController {
   constructor(private readonly service: ActionsService) {}

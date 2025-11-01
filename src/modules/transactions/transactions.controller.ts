@@ -7,6 +7,7 @@ import {
   Query,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -14,23 +15,24 @@ import {
   ApiResponse,
   ApiParam,
   ApiBody,
+  ApiSecurity,
 } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { GetTransactionsDto } from './dto/get-transactions.dto';
 import { TransferService } from './transfer.service';
+import { ApiKeyGuard } from 'src/lib/guards/api-key.guard';
 
 @ApiTags('Transactions')
 @Controller('transactions')
+@UseGuards(ApiKeyGuard)
+@ApiSecurity('api_key', ['x-api-key'])
 export class TransactionsController {
   constructor(
     private readonly service: TransactionsService,
     private readonly transfer: TransferService,
   ) {}
 
-  // -----------------------------------------
-  // 🟢 Create transaction
-  // -----------------------------------------
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
@@ -68,9 +70,6 @@ export class TransactionsController {
     };
   }
 
-  // -----------------------------------------
-  // 🟠 Get all transactions (paginated)
-  // -----------------------------------------
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
@@ -111,9 +110,6 @@ export class TransactionsController {
     };
   }
 
-  // -----------------------------------------
-  // 🟡 Get one transaction
-  // -----------------------------------------
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
@@ -155,9 +151,6 @@ export class TransactionsController {
     };
   }
 
-  // -----------------------------------------
-  // 🔵 Process transaction
-  // -----------------------------------------
   @Post(':id/process')
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiOperation({
@@ -189,9 +182,6 @@ export class TransactionsController {
     };
   }
 
-  // -----------------------------------------
-  // 🔴 Cancel transaction
-  // -----------------------------------------
   @Post(':id/cancel')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
