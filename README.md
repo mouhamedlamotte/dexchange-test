@@ -30,7 +30,7 @@ cd dexchange-test
 2. **Configurer les variables d'environnement**
 
 ```bash
-cp env.example .env
+cp .env.example .env
 ```
 
 3. **Éditer le fichier `.env`**
