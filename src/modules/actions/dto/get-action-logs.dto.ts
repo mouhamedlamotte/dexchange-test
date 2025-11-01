@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { ActionType } from 'prisma/generated/enums';
 import { PaginationDto } from 'src/lib/dto';
 
@@ -9,6 +9,7 @@ export class GetActionLogsDto extends PaginationDto {
     description: 'Id of the transaction',
   })
   @IsString()
+  @IsOptional()
   transactionId?: string;
 
   @ApiPropertyOptional({
@@ -16,5 +17,6 @@ export class GetActionLogsDto extends PaginationDto {
     description: 'Id of the transaction',
   })
   @IsString()
+  @IsOptional()
   type?: string;
 }

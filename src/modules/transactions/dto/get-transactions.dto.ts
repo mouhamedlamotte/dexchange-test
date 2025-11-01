@@ -6,6 +6,7 @@ import { PaginationDto } from 'src/lib/dto';
 
 export class GetTransactionsDto extends PaginationDto {
   @ApiPropertyOptional({
+    enum: Status,
     example: Status.PENDING,
     description: 'Status of the transaction',
   })

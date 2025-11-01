@@ -8,7 +8,6 @@ import * as compression from 'compression';
 import { CustomExceptionFilter } from './lib/filters';
 import { ErrorInterceptor } from './lib/interceptors';
 import { AppModule } from './modules/app.module';
-import * as path from 'path';
 import { ApiKeyGuard } from './lib/guards/api-key.guard';
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -58,10 +57,6 @@ async function bootstrap() {
       maxAge: 86400,
     });
 
-    app.useStaticAssets(path.join(process.cwd(), 'media'), {
-      prefix: `/${globalPrefix}/media/`,
-    });
-
     app.setGlobalPrefix(globalPrefix);
 
     app.useGlobalPipes(
@@ -84,6 +79,7 @@ async function bootstrap() {
       .setTitle(configService.get('app.name'))
       .setDescription(`${name} API Documentation`)
       .setVersion(configService.get('app.version'))
+      .addServer(`http://localhost:${port}`, 'Local Serveur')
       .addApiKey(
         {
           type: 'apiKey',
@@ -106,7 +102,7 @@ async function bootstrap() {
 
     // Graceful shutdown
     app.enableShutdownHooks();
-    const host = process.env.HOST || '0.0.0.0';
+    const host = process.env.HOST || 'localhost';
 
     await app.listen(port, '0.0.0.0');
 

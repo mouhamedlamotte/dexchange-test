@@ -22,6 +22,8 @@ export class ActionsController {
     description: 'Liste paginée des logs d’actions',
     schema: {
       example: {
+        message: 'Liste paginée des logs d’actions ',
+        statusCode: HttpStatus.OK,
         data: [
           {
             type: 'TRANSACTION_CREATED',
@@ -38,7 +40,7 @@ export class ActionsController {
             },
           },
         ],
-        meta: {
+        pagination: {
           page: 1,
           limit: 10,
           total: 45,
@@ -58,6 +60,11 @@ export class ActionsController {
     description: 'Erreur interne du serveur',
   })
   async findAll(@Query() query: GetActionLogsDto) {
-    return this.service.findAll(query);
+    const result = await this.service.findAll(query);
+    return {
+      message: 'Liste paginée des logs d’actions ',
+      statusCode: HttpStatus.OK,
+      ...result,
+    };
   }
 }

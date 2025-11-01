@@ -36,7 +36,7 @@ export class ActionsService {
         query.sortOrder,
       );
 
-      const result = this.pagination.paginate(this.prisma.action, {
+      const result = await this.pagination.paginate(this.prisma.action, {
         page: query.page,
         limit: query.limit,
         where,

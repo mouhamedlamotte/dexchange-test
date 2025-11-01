@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import appConfig from 'src/config/app.config';
 import { CommonModule } from 'src/lib/modules';
 import { TransactionsModule } from './transactions/transactions.module';
+import { ActionsModule } from './actions/actions.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     }),
     CommonModule,
     TransactionsModule,
+    ActionsModule,
   ],
   controllers: [],
   providers: [],

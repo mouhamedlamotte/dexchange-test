@@ -1,10 +1,18 @@
-import { ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  ForbiddenException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import {
+  ActionType,
   FilterConfig,
   FilterService,
   PaginationService,
   PrismaService,
+  Status,
 } from 'src/lib/services';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ActionsService } from '../actions/actions.service';
@@ -25,13 +33,18 @@ export class TransactionsService {
     private readonly pagination: PaginationService,
     private readonly filter: FilterService,
   ) {}
+
+  private calculateFees(amount: number): number {
+    return Math.min(Math.max(Math.ceil(amount * 0.008), 100), 1500);
+  }
+
   private generateReference(): string {
     return `DEXC_TX_${randomUUID().replace(/-/g, '').substring(0, 16).toUpperCase()}`;
   }
 
   private getTransactionsFilterConfig(): FilterConfig {
     return {
-      allowedFilters: ['channel', 'status'],
+      allowedFilters: ['status'],
       relationFilters: [
         {
           relation: 'channel',
@@ -62,7 +75,7 @@ export class TransactionsService {
 
   async create(data: CreateTransactionDto) {
     try {
-      const channel = this.prisma.channel.findUnique({
+      const channel = await this.prisma.channel.findUnique({
         where: {
           code: data.channel,
         },
@@ -72,16 +85,14 @@ export class TransactionsService {
         throw new ForbiddenException(`Channer ${data.channel} does not exist`);
       }
 
-      const fees = Math.min(
-        Math.max(Math.ceil(data.amount * 0.008), 100),
-        1500,
-      );
+      const fees = this.calculateFees(data.amount);
       const total = data.amount + fees;
 
       const transaction = await this.prisma.transaction.create({
         data: {
           reference: this.generateReference(),
           amount: total,
+          metadata: JSON.stringify(data.metadata),
           fees,
           channel: {
             connect: {
@@ -94,7 +105,7 @@ export class TransactionsService {
       });
 
       await this.actions.add({
-        type: 'TRANSFER_CREATED',
+        type: ActionType.TRANSFER_CREATED,
         transactionId: transaction.id,
       });
 
@@ -114,11 +125,14 @@ export class TransactionsService {
         query.sortOrder,
       );
 
-      const result = this.pagination.paginate(this.prisma.transaction, {
+      const result = await this.pagination.paginate(this.prisma.transaction, {
         page: query.page,
         limit: query.limit,
         where,
         orderBy,
+        include: {
+          channel: true,
+        },
       });
 
       return result;
@@ -134,11 +148,84 @@ export class TransactionsService {
         where: {
           id,
         },
+        include: {
+          channel: true,
+        },
       });
 
       if (!transaction) {
         throw new NotFoundException(`Transaction ${id} does not exist`);
       }
+      return transaction;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async updateStatus(id: string, status: Status) {
+    try {
+      const transaction = await this.prisma.transaction.update({
+        where: {
+          id,
+        },
+        data: {
+          status,
+        },
+      });
+
+      const actionsStatusMap = {
+        [Status.FAILED]: ActionType.TRANSFER_FAILED,
+        [Status.PROCESSING]: ActionType.TRANSFER_PROCESSING,
+        [Status.CANCELED]: ActionType.TRANSFER_CANCELED,
+        [Status.SUCCESS]: ActionType.TRANSFER_SUCCESS,
+      };
+
+      await this.actions.add({
+        type: actionsStatusMap[status],
+        transactionId: id,
+      });
+
+      return transaction;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async cancel(id: string) {
+    try {
+      const transaction = await this.prisma.transaction.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!transaction) {
+        throw new NotFoundException(`Transaction ${id} does not exist`);
+      }
+
+      if (transaction.status != Status.PENDING) {
+        throw new ConflictException(
+          `Transaction ${id} can not be cancelled as it is ${transaction.status}`,
+        );
+      }
+
+      const updatedTransaction = await this.prisma.transaction.update({
+        where: {
+          id,
+        },
+        data: {
+          status: Status.CANCELED,
+        },
+      });
+
+      await this.actions.add({
+        type: ActionType.TRANSFER_CANCELED,
+        transactionId: id,
+      });
+
+      return updatedTransaction;
     } catch (error) {
       this.logger.error(error);
       throw error;
